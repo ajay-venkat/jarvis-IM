@@ -13,19 +13,19 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  final TextEditingController _groqKeyController = TextEditingController();
-  bool _groqKeyObscured = true;
+  final TextEditingController _geminiKeyController = TextEditingController();
+  bool _geminiKeyObscured = true;
 
   @override
   void initState() {
     super.initState();
     final provider = context.read<JarvisProvider>();
-    _groqKeyController.text = provider.settingsService.groqApiKey;
+    _geminiKeyController.text = provider.settingsService.geminiApiKey;
   }
 
   @override
   void dispose() {
-    _groqKeyController.dispose();
+    _geminiKeyController.dispose();
     super.dispose();
   }
 
@@ -67,26 +67,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Section: Groq API Key
-                _buildSectionHeader('AI Engine', Icons.psychology_outlined),
+                // Section: Gemini API Key
+                _buildSectionHeader('AI Backend', Icons.memory),
                 const SizedBox(height: 12),
                 _buildApiKeyCard(
-                  title: 'Groq API Key',
-                  controller: _groqKeyController,
-                  obscured: _groqKeyObscured,
+                  title: 'Gemini API Key',
+                  controller: _geminiKeyController,
+                  obscured: _geminiKeyObscured,
                   onToggleObscured: () {
-                    setState(() => _groqKeyObscured = !_groqKeyObscured);
+                    setState(() => _geminiKeyObscured = !_geminiKeyObscured);
                   },
                   onSave: () async {
-                    await provider.setGroqApiKey(_groqKeyController.text.trim());
+                    await provider.setGeminiApiKey(_geminiKeyController.text.trim());
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        _buildSnackBar('Groq API key saved successfully'),
+                        _buildSnackBar('Gemini API key saved successfully'),
                       );
                     }
                   },
-                  linkText: 'Get your free API key at console.groq.com',
-                  linkUrl: AppConstants.groqConsoleUrl,
+                  linkText: 'Get your free key at Google AI Studio',
+                  linkUrl: AppConstants.geminiConsoleUrl,
                 ),
 
                 const SizedBox(height: 28),

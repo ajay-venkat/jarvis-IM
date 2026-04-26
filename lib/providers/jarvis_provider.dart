@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../models/chat_message.dart';
-import '../services/groq_service.dart';
+import '../services/gemini_service.dart';
 import '../services/speech_service.dart';
 import '../services/tts_service.dart';
 import '../services/wake_word_service.dart';
@@ -19,7 +19,7 @@ enum JarvisState {
 
 class JarvisProvider extends ChangeNotifier {
   // Services
-  final GroqService _groqService = GroqService();
+  final GeminiService _geminiService = GeminiService();
   final SpeechService _speechService = SpeechService();
   final TtsService _ttsService = TtsService();
   final WakeWordService _wakeWordService = WakeWordService();
@@ -42,7 +42,7 @@ class JarvisProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   bool get isInitialized => _isInitialized;
 
-  bool get hasGroqApiKey => _settingsService.hasGroqApiKey;
+  bool get hasGeminiApiKey => _settingsService.hasGeminiApiKey;
   bool get wakeWordEnabled => _settingsService.wakeWordEnabled;
 
   SettingsService get settingsService => _settingsService;
@@ -203,7 +203,7 @@ class JarvisProvider extends ChangeNotifier {
     }
   }
 
-  /// Process user speech input: send to Groq and speak response.
+  /// Process user speech input: send to Gemini and speak response.
   Future<void> _processUserInput(String text) async {
     // Stop speech recognition
     await _speechService.stopListening();
@@ -214,15 +214,15 @@ class JarvisProvider extends ChangeNotifier {
     _currentSpeechText = '';
     notifyListeners();
 
-    // Send to Groq API
+    // Send to Gemini API
     try {
-      if (!_settingsService.hasGroqApiKey) {
-        throw GroqException('Please add your Groq API key in Settings.');
+      if (!_settingsService.hasGeminiApiKey) {
+        throw GeminiException('Please add your Gemini API key in Settings.');
       }
 
-      final response = await _groqService.sendMessage(
+      final response = await _geminiService.sendMessage(
         conversationHistory: _messages,
-        apiKey: _settingsService.groqApiKey,
+        apiKey: _settingsService.geminiApiKey,
       );
 
       // Add assistant message
@@ -241,7 +241,7 @@ class JarvisProvider extends ChangeNotifier {
           notifyListeners();
         },
       );
-    } on GroqException catch (e) {
+    } on GeminiException catch (e) {
       final errorResponse =
           e.message.contains('API key')
               ? e.message
@@ -297,9 +297,9 @@ class JarvisProvider extends ChangeNotifier {
     }
   }
 
-  /// Update the Groq API key.
-  Future<void> setGroqApiKey(String key) async {
-    await _settingsService.setGroqApiKey(key);
+  /// Update the Gemini API key.
+  Future<void> setGeminiApiKey(String key) async {
+    await _settingsService.setGeminiApiKey(key);
     notifyListeners();
   }
 

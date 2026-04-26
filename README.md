@@ -10,7 +10,7 @@ A full-featured, cross-platform AI voice assistant built with Flutter, inspired 
 ## ✨ Features
 
 - 🎤 **Voice-first interaction** — Speak to Jarvis, get spoken responses
-- 🧠 **Groq AI (LLaMA 3)** — Free, fast AI backend with full conversation context
+- 🧠 **Gemini AI Backend** — Powered by Google's Gemini 1.5 Flash for rapid, smart responses
 - 🗣️ **"Hey Jarvis" wake word** — Hands-free activation using built-in speech recognition (no API key needed!)
 - 🔵 **Animated arc reactor** — Pulses idle, ripples when listening, glows when speaking
 - 💬 **Chat log** — Full conversation history with styled bubbles
@@ -57,7 +57,7 @@ Place a short `.wav` chime file at `assets/sounds/chime.wav` for wake word activ
 
 ### Configure API Keys (inside the app)
 1. Open **Settings** (⚙️ icon)
-2. Paste your **Groq API Key** — free from [console.groq.com](https://console.groq.com)
+2. Paste your **Gemini API Key** — free from [Google AI Studio](https://aistudio.google.com/app/apikey)
 3. Enable **"Hey Jarvis" wake word** toggle (no API key needed — uses your device's speech recognition!)
 
 ## 🏗️ Architecture
@@ -70,7 +70,7 @@ lib/
 ├── models/
 │   └── chat_message.dart        # Message model
 ├── services/
-│   ├── groq_service.dart        # Groq API calls
+│   ├── gemini_service.dart      # Gemini API calls
 │   ├── speech_service.dart      # Speech-to-text
 │   ├── tts_service.dart         # Text-to-speech
 │   ├── wake_word_service.dart   # Speech-based wake word (no API key)
@@ -110,7 +110,7 @@ User speaks "Hey Jarvis"
     → Speech recognition detects "Jarvis" keyword (on-device, free)
     → Chime plays 🔔
     → Speech-to-text captures command
-    → Full conversation sent to Groq API
+    → Full conversation sent to Gemini API
     → AI response received
     → Text-to-speech reads it aloud
     → Porcupine resumes listening

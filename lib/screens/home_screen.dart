@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 8),
 
                           // API key warning banner
-                          if (!provider.hasGroqApiKey)
+                          if (!provider.hasGeminiApiKey)
                             _buildApiKeyBanner(context),
 
                           // Error banner
@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'Please add your Groq API key in Settings',
+                'Please add your Gemini API key in Settings',
                 style: TextStyle(
                   color: AppConstants.warningOrange,
                   fontSize: 13,

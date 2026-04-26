@@ -16,24 +16,22 @@ class AppConstants {
   // Border radius
   static const double borderRadius = 16.0;
 
-  // Groq API
-  static const String groqEndpoint =
-      'https://api.groq.com/openai/v1/chat/completions';
-  static const String groqModel = 'llama3-8b-8192';
+  // Gemini API
+  static const String geminiEndpoint =
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
   static const String systemPrompt =
       'You are Jarvis, a highly intelligent, calm, and witty AI assistant '
       'inspired by Iron Man. Keep responses concise, helpful, and slightly '
       'clever. Never say you are an AI made by Meta or Groq — you are Jarvis.';
 
   // SharedPreferences keys
-  static const String prefGroqApiKey = 'groq_api_key';
+  static const String prefGeminiApiKey = 'gemini_api_key';
   static const String prefVoiceSpeed = 'voice_speed';
   static const String prefVoicePitch = 'voice_pitch';
   static const String prefSelectedVoice = 'selected_voice';
   static const String prefWakeWordEnabled = 'wake_word_enabled';
 
-  // URLs
-  static const String groqConsoleUrl = 'https://console.groq.com';
+  static const String geminiConsoleUrl = 'https://aistudio.google.com/app/apikey';
 
   // Mic button size
   static const double micButtonSize = 70.0;

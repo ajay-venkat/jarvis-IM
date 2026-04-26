@@ -8,13 +8,13 @@ class SettingsService {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  // Groq API Key
-  String get groqApiKey => _prefs.getString(AppConstants.prefGroqApiKey) ?? '';
-  Future<void> setGroqApiKey(String key) async {
-    await _prefs.setString(AppConstants.prefGroqApiKey, key);
+  // Gemini API Key
+  String get geminiApiKey => _prefs.getString(AppConstants.prefGeminiApiKey) ?? '';
+  Future<void> setGeminiApiKey(String key) async {
+    await _prefs.setString(AppConstants.prefGeminiApiKey, key);
   }
 
-  bool get hasGroqApiKey => groqApiKey.isNotEmpty;
+  bool get hasGeminiApiKey => geminiApiKey.isNotEmpty;
 
   // Voice Speed
   double get voiceSpeed =>
